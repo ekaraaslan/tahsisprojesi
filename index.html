@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sosyal Konut Tahsis Projesi 2026</title>
+    <meta name="description" content="T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı TOKİ Sosyal Konut Tahsis Projesi 2026 bilgilendirme platformu.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        },
+                        surface: '#ffffff',
+                        background: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #0369a1;
+            --primary-dark: #0c4a6e;
+            --accent: #e11d48;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Accordion Animation */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .accordion-active .accordion-content {
+            max-height: 500px; /* Arbitrary large number */
+            padding-bottom: 1rem;
+        }
+        .accordion-active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        
+        /* Checkmark styling for lists */
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <header class="glass-header sticky top-0 z-50 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo area -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-white text-white p-2 rounded-lg flex flex-col items-center justify-center">
+                        <img src="images/logos/tc.png" alt="Logo" class="" style="width: 70px;">
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight text-primary-900">SOSYAL KONUT</h1>
+                        <p class="text-xs font-semibold text-primary-600 tracking-wider">TAHSİS PROJESİ</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex space-x-8">
+                    <a href="#proje" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Proje Özeti</a>
+<!--                     <a href="#basvuru" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Başvuru & Şartlar</a>
+                    <a href="#konutlar" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Bölgeler & Konutlar</a>
+ -->                    <a href="#gorseller" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Görseller</a>
+                    <a href="#bedeller" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Tahsis Bedelleri</a>
+                    <a href="#surec" class="text-sm font-medium text-slate-600 hover:text-primary-600 transition">Süreç & Denetim</a>
+                </nav>
+
+                <!-- CTA -->
+                <div class="hidden lg:flex">
+                    <a href="#sartlar" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-md">
+                        Başvuru Şartları
+                    </a>
+                </div>
+                <div class="hidden lg:flex">
+                    <a href="#sss" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-md">
+                        15 Soruda Kiralık Konut Projesi
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-600 hover:text-primary-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#proje" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Proje Özeti</a>
+<!--                 <a href="#basvuru" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Başvuru & Şartlar</a>
+                <a href="#konutlar" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Bölgeler & Konutlar</a>
+ -->                <a href="#gorseller" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Görseller & Konumlar</a>
+                <a href="#bedeller" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Tahsis Bedelleri</a>
+                <a href="#surec" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Süreç & Denetim</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="logolar" class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="p-4"><img src="images/logos/csib.svg" style="width: 90%; height: auto;"></div>
+                <div class="p-12"><img src="images/logos/toki_1.svg" style="width: 70%; height: auto;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proje" class="relative pb-20 lg:pb-8 overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-primary-700 text-xs font-bold tracking-wide mb-6 uppercase">
+                        <i class="fa-solid fa-calendar-check"></i> 2026 Hedefi
+                    </div>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 leading-tight">
+                        Güvenli Yuvalar <span class="text-primary-600">Güçlü Yarınlar</span>
+                    </h2>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Dar gelirli ailelere destek ve sosyal devlet anlayışıyla hayata geçirilen Sosyal Konut Tahsis Projesi, İstanbul genelinde yeni bir yaşam alanı sunuyor.
+                    </p>
+                    <!--
+                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                        <a href="#basvuru" class="flex justify-center items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl text-base font-bold transition shadow-lg shadow-blue-500/30">
+                            Başvuru Şartları <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#konutlar" class="flex justify-center items-center gap-2 bg-white hover:bg-slate-50 text-primary-700 border border-slate-200 px-8 py-4 rounded-xl text-base font-bold transition shadow-sm">
+                            Konutları İncele
+                        </a>
+                    </div>
+                    -->
+                    <!-- Application Information Forms -->
+                    <div class="w-full max-w-2xl text-2xl font-bold text-primary-700 bg-white mb-4 p-4 rounded-xl">
+                        <div class="w-full max-w-2xl text-2xl font-bold text-primary-700  mb-4 p-4" >Başvuru Bilgilendirme Formları</div>
+                        <div class="flex flex-col sm:flex-row gap-4 mb-10" style="display: grid;">
+                            <a href="bbf_1_v1.pdf" class="flex justify-left items-left gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl text-base font-bold transition shadow-lg shadow-blue-500/30" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> Ataşehir, Sancaktepe, Ümraniye ve Üsküdar İlçeleri
+                            </a>
+                            <a href="bbf_2_v1.pdf" class="flex justify-left items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl text-base font-bold transition shadow-lg shadow-blue-500/30" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> Maltepe, Tuzla ve Kartal İlçeleri
+                            </a>
+                            <a href="bbf_3_v1.pdf" class="flex justify-left items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl text-base font-bold transition shadow-lg shadow-blue-500/30" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> Başakşehir, Gaziosmanpaşa, Beyoğlu Ve Güngören İlçeleri
+                            </a>
+                            <a href="bbf_4_v1.pdf" class="flex justify-left items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl text-base font-bold transition shadow-lg shadow-blue-500/30" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> Arnavutköy İlçesi
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Hero Graphic / Large KPI -->
+                <div class="relative lg:ml-auto w-full max-w-lg">
+                    <div class="absolute inset-0 bg-primary-100 rounded-[3rem] transform rotate-3 scale-105 opacity-50"></div>
+                    <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl relative border border-slate-100 flex flex-col items-center justify-center text-center">
+                        <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-house-chimney text-3xl text-primary-600"></i>
+                        </div>
+                        <h3 class="text-7xl md:text-8xl font-black text-slate-900 tracking-tighter mb-4">1.071</h3>
+                        <p class="text-xl font-semibold text-slate-600">Tahsis Edilecek Konut</p>
+                        <div class="w-16 h-1 bg-primary-500 rounded-full mt-6 mb-6"></div>
+                        <p class="text-sm text-slate-500">İstanbul ili genelinde 4 grupta e-Devlet üzerinden kura ile tahsis edilecektir.</p>
+                    </div>
+                    <br>
+                    <!-- Small Calendar Cards -->
+                    <div class="relative lg:ml-auto max-w-lg grid grid-cols-2 gap-2">
+                        <div class="p-2 rounded-[3rem] border border-slate-100 shadow-sm bg-white pl-4">
+                            <p class="text-xs text-slate-500 font-medium">Başvuru Tarihi</p>
+                            <p class="text-sm font-bold text-slate-800">14 - 25 Eylül 2026</p>
+                        </div>
+                        <div class="p-2 rounded-[3rem] border border-slate-100 shadow-sm bg-white pl-4">
+                            <p class="text-xs text-slate-500 font-medium">Kura Çekilişi</p>
+                            <p class="text-sm font-bold text-slate-800">Ekim 2026</p>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sartlar" class="py-16 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Rules Checklist -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-primary-600"></i> Başvuru Şartları
+                    </h2>
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                        <ul class="text-sm text-slate-700 check-list">
+                            <li>T.C. vatandaşı olmak ve 18 yaşını tamamlamış olmak</li>
+                            <li>Bir hane halkı adına yalnızca bir başvuru yapmak</li>
+                            <li>Daha önce TOKİ'den konut satın almamış olmak</li>
+                            <li>Önceki sosyal konut projelerinde (veya İlk Evim Arsa) aktif asil/yedek hak sahibi olmamak</li>
+                            <li>Kendisi veya eşi adına, T.C. sınırları içinde tapuda kayıtlı bağımsız konut bulunmamak</li>
+                        </ul>
+                    </div>
+                </div>
+
+                                <!-- Rules Checklist -->
+                <div><br><br>
+                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                        <ul class="text-sm text-slate-700 check-list">
+                            <li>Kendisi veya eşi adına, son beş yıl içinde konut alım-satım işlemi yapmamış olmak</li>
+                            <li>Evli olmak (65 yaşını doldurmuş başvuru sahipleri için evli olma şartı aranmaz)</li>
+                            <li>Hane halkı aylık net gelirinin <strong>100.000 TL'yi</strong> aşmaması</li>
+                            <li>Başvuru tarihi itibarıyla, İstanbul İlinde <strong>en az bir yıldır</strong> kesintisiz ikamet etmek</li>
+                            <li>Seçilen kategoriye ilişkin ilan edilen şartları sağlamak ve belgelemek</li>
+                        </ul>
+                    </div>
+                </div>
+<!--                 <!-- Process & Systems ->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-primary-600"></i> Kontrol Sistemleri & Akış
+                    </h2>
+                    
+                    <div class="relative pl-8 border-l-2 border-slate-200 space-y-6">
+                        <!-- Step 1 ->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-sm">1</div>
+                            <h4 class="font-bold text-slate-800">E-Devlet Başvurusu</h4>
+                            <p class="text-sm text-slate-600 mt-1">Vatandaşlık, yaş, tek başvuru ve TOKİ hak sahipliği otomatik kontrol edilir.</p>
+                        </div>
+                        <!-- Step 2 ->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-sm">2</div>
+                            <h4 class="font-bold text-slate-800">Sistem Doğrulaması</h4>
+                            <div class="flex gap-2 mt-2 flex-wrap">
+                                <span class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600">FYS</span>
+                                <span class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600">MERNİS</span>
+                                <span class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600">TAKBİS</span>
+                                <span class="text-xs font-semibold bg-slate-100 px-2 py-1 rounded text-slate-600">SGK</span>
+                            </div>
+                        </div>
+                        <!-- Step 3 ->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-sm">3</div>
+                            <h4 class="font-bold text-slate-800">Kura Çekilişi (Ekim 2026)</h4>
+                            <p class="text-sm text-slate-600 mt-1">Şartları taşıyanlar arasında hak sahibi belirleme kurası çekilir.</p>
+                        </div>
+                        <!-- Step 4 ->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white shadow-sm">4</div>
+                            <h4 class="font-bold text-slate-800">Fiziki Kontrol & Sözleşme</h4>
+                            <p class="text-sm text-slate-600 mt-1">Emlak Yönetim A.Ş. tarafından belge kontrolü (Maaş bordrosu, Tarihçeli İkametgah) yapılır.</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <section id="gorseller" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-map-location-dot text-primary-600"></i> Projeler
+                </h2>
+                <p class="text-slate-600">İstanbul’da Tahsis Konutlarının İlçe Bazında Dağılımı</p>
+            </div>
+
+            <!-- Main Istanbul Map -->
+            <div class="mb-12 relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
+                <img src="images/harita.jpg" alt="İstanbul Konut Dağılım Haritası" class="w-full h-[300px] md:h-[450px] object-cover">
+<!--                 <div class="absolute bottom-0 left-0 w-full p-1 md:p-8 text-left mt-2">
+                    <div class="flex flex-wrap gap-2 mb-1">
+                        <span class="bg-primary-500 text-black text-xs font-bold px-2 py-1 rounded">İstanbul</span>
+                        <span class="bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded border border-white/30">Tüm Gruplar</span>
+                    </div>
+                    <h3 class="text-text font-bold text-2xl mb-1">İLÇELERE GÖRE KONUT İSTATİSTİKLERİ</h3>
+                    <p class="text-slate-900 text-sm max-w-2xl">Toplam 1.071 konutun İstanbul ilçelerindeki coğrafi dağılım haritası.</p>
+                </div> -->
+            </div>
+
+            <!-- District Gallery Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Ataşehir -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/1.grup_atasehir.jpg" target="_blank"><img src="images/1.grup_atasehir.jpg" alt="Ataşehir Görseli" class="w-full h-full object-cover"></a>
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">1. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Ataşehir</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">96 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Yukarı Dudullu Mah. Şerifali Bölgesi</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i>Ataşehir
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ümraniye -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/1.grup_umraniye.jpg" target="_blank"><img src="images/1.grup_umraniye.jpg" alt="Ümraniye Görseli" class="w-full h-full object-cover"></a>
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">1. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Ümraniye</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">98 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Hekimbaşı Mahallesi</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i>Ümraniye
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maltepe -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/2.grup_maltepe.jpg" target="_blank"><img src="images/2.grup_maltepe.jpg" alt="Maltepe Görseli" class="w-full h-full object-cover"></a>
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">2. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Maltepe</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">235 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Atışokulu ve Gülsuyu (İETT Blokları) Bölgeleri</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i>Maltepe
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Başakşehir -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/3.grup_basaksehir.jpg" target="_blank"><img src="images/3.grup_basaksehir.jpg" alt="Başakşehir Görseli" class="w-full h-full object-cover"></a> 
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">3. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Başakşehir</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">50 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Kayabaşı Bölgesi</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i> Kayabaşı
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gaziosmanpaşa -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/3.grup_gaziosmanpasa.jpg" target="_blank"><img src="images/3.grup_gaziosmanpasa.jpg" alt="Gaziosmanpaşa Görseli" class="w-full h-full object-cover"></a>
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">3. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Gaziosmanpaşa</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">289 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Sarıgöl</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i> Gaziosmanpaşa
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arnavutköy -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden card-hover flex flex-col">
+                    <div class="relative h-56">
+                        <a href="images/4.grup_arnavutkoy.jpg" target="_blank"><img src="images/4.grup_arnavutkoy.jpg" alt="Arnavutköy Görseli" class="w-full h-full object-cover"></a>
+                        <div class="absolute top-3 right-3 bg-primary-600 text-white text-xs font-bold px-3 py-1.5 rounded shadow-sm">4. Grup</div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-slate-800 text-xl">Arnavutköy</h4>
+                            <span class="bg-blue-50 text-primary-700 font-bold text-sm px-2.5 py-1 rounded-md border border-blue-100">90 Konut</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex-grow">Baklalı Mahallesi</p>
+                        <div class="text-xs text-slate-400 flex items-center gap-1 mt-auto">
+                            <i class="fa-solid fa-file-pdf"></i> Arnavutköy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bedeller" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Tahsis Bedelleri</h2>
+                <p class="text-slate-600">Sosyal Konut Tahsis Projesinde  belirlenen aylık tahsis bedelleri.<br>Fiyatlara KDV dahildir.</p>
+            </div>
+
+            <!-- Pricing Details Table -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-10">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 w-1/3">Bölge (Grup)</th>
+                                <th scope="col" class="px-6 py-4 text-center">1+1 (TL/Ay)</th>
+                                <th scope="col" class="px-6 py-4 text-center">2+1 (TL/Ay)</th>
+                                <th scope="col" class="px-6 py-4 text-center">3+1 (TL/Ay)</th>
+                                <th scope="col" class="px-6 py-4 text-center">4+1 (TL/Ay)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 font-medium text-slate-800">1. Grup (Ataşehir, Sancaktepe, Ümraniye, Üsküdar)</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">10.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">12.000 - 17.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">15.000 - 18.000</td>
+                                <td class="px-6 py-4 text-center text-slate-400">-</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 font-medium text-slate-800">2. Grup (Maltepe, Tuzla, Kartal)</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">10.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">12.000 - 17.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">15.000 - 18.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">18.000 - 20.000</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 font-medium text-slate-800">3. Grup (Başakşehir, G.Osmanpaşa, Beyoğlu, Güngören)</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">10.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">12.000 - 17.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">15.000 - 18.000</td>
+                                <td class="px-6 py-4 text-center text-slate-400">-</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-6 py-4 font-medium text-slate-800">4. Grup (Arnavutköy)</td>
+                                <td class="px-6 py-4 text-center text-slate-400">-</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">12.000 - 17.000</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-600">15.000 - 18.000</td>
+                                <td class="px-6 py-4 text-center text-slate-400">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Financial Rules -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2"><i class="fa-solid fa-money-bill-transfer text-primary-600"></i> İlk 12 Ay Artış Yok</h4>
+                    <p class="text-sm text-slate-600">Konutun tesliminden itibaren ilk 12 ay tahsis bedeline artış uygulanmaz. İlk artış, 12 ayın sonrasındaki ilk Ocak ayında TÜFE esasına göre yapılır.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2"><i class="fa-solid fa-shield-halved text-primary-600"></i> Teminat</h4>
+                    <p class="text-sm text-slate-600">Tahsis Sözleşmesi imzalanmadan önce, bir aylık tahsis bedeli tutarında teminat alınır. Tahsis süresi sonunda, hak sahibinin İdareye karşı herhangi bir borcu veya konutta oluşmuş bir zararı bulunmaması halinde teminat, güncel tahsis bedeli üzerinden iade edilir.</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                    <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2"><i class="fa-solid fa-baby text-primary-600"></i> Genç Aile İstisnası</h4>
+                    <p class="text-sm text-slate-600">Genç kategorisi hak sahiplerinin tahsis süresi içinde çocuk sahibi olması halinde tahsis süresi sonuna kadar bedel artışı uygulanmaz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="surec" class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Obligations -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Tahsis Sahibinin Yükümlülükleri</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <i class="fa-solid fa-house-user text-primary-500 mb-2 text-xl"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Fiilen Oturma</h4>
+                            <p class="text-xs text-slate-500 mt-1">Konut yalnızca hak sahibi ve birinci derece yakınları tarafından ikamet amacıyla kullanılabilir; konut boş bırakılamaz.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <i class="fa-solid fa-hourglass-end text-primary-500 mb-2 text-xl"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Süre Sınırı</h4>
+                            <p class="text-xs text-slate-500 mt-1">Teslim tarihinden itibaren azami tahsis süresi 3 yıldır.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <i class="fa-solid fa-ban text-accent mb-2 text-xl"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Kullanım Hakkı</h4>
+                            <p class="text-xs text-slate-500 mt-1">Becayiş hakkı bulunmamaktadır. Konut üçüncü kişilere kiralanamaz ve kullanım hakkı devredilemez ve ofis, ticarethane veya herhangi bir ticari faaliyet amacıyla kullanılamaz.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                            <i class="fa-solid fa-shop-slash text-accent mb-2 text-xl"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Konut Mülkiyet Şartının Devamı</h4>
+                            <p class="text-xs text-slate-500 mt-1">Tahsis süresi boyunca, tahsis sahibi veya eşi adına bağımsız konut niteliğinde taşınmaz edinilmesi halinde tahsis hakkı sona erer ve konutun tahliyesi süreci başlatılır.</p>
+                        </div>
+<!--                         <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 sm:col-span-2 flex items-center gap-4">
+                            <i class="fa-solid fa-file-contract text-primary-500 text-2xl ml-2"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Yeni Konut Edinmeme</h4>
+                                <p class="text-xs text-slate-500 mt-1">Tahsis süresince tahsis sahibi veya eşi adına bağımsız konut niteliğinde taşınmaz edinilemez.</p>
+                            </div>
+                        </div> -->
+                    </div>
+                    
+                    <!-- Yıllık Denetim Box -->
+                    <div class="mt-6 bg-slate-800 text-white p-5 rounded-xl">
+                        <h4 class="font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-magnifying-glass"></i>Yıllık Tahsis Şartları Kontrolü</h4>
+                        <p class="text-sm text-slate-300">Tahsis süresi boyunca, hak sahiplerinin tahsis şartlarını taşımaya devam edip etmediği (Konut edinme, medeni hal, genel hükümlere uyum ve fiili ikamet)  yıllık olarak kontrol edilir.</p>
+                    </div>
+                </div>
+
+                <!-- Eviction Causes Accordion -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 text-accent flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Tahliye Sebepleri
+                    </h2>
+                    <p class="text-sm text-slate-600 mb-4">Aşağıdaki hallerden herhangi birinin tespiti durumunda tahsis sona erdirilir ve tahliye işlemi başlatılır:</p>
+                    
+                    <div class="space-y-3" id="eviction-accordion">
+                        <!-- Accordion Items -->
+<!--                         <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer">
+                            <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                                <h4 class="font-bold text-slate-700 text-sm">Konut Edinilmesi</h4>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                            <div class="accordion-content px-5">
+                                <p class="text-sm text-slate-600">Tahsis süresince hak sahibi veya eşinin T.C. sınırları içinde konut satın alması.</p>
+                            </div>
+                        </div> -->
+
+                        <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer">
+                            <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                                <h4 class="font-bold text-slate-700 text-sm">Gerçeğe Aykırı Beyan</h4>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                            <div class="accordion-content px-5">
+                                <p class="text-sm text-slate-600">Başvuru veya denetim süreçlerinde gerçeğe aykırı beyanda bulunulduğunun tespit edilmesi halinde,sözleşme imzalanmaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer">
+                            <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                                <h4 class="font-bold text-slate-700 text-sm">Tahsis Şartlarının Kaybedilmesi</h4>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                            <div class="accordion-content px-5">
+                                <p class="text-sm text-slate-600">Tahsis süresi boyunca yapılan yıllık kontroller sonucunda, tahsis sahibi veya eşinin tahsis şartlarından herhangi birini kaybettiğinin veya sözleşme hükümlerine aykırı davrandığının tespit edilmesi halinde, tahsis hakkı sona erer ve konutun tahliyesi süreci başlatılır. Örn. Kullanım hakkının amacı dışında kullanılması, konut mülkiyet durumunun değişmesi, maddi yükümlülüklerin yerine getirilmemesi, medeni durum değişikliği vb</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer">
+                            <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                                <h4 class="font-bold text-slate-700 text-sm">Maddi Yükümlülüklerin (Tahsis Bedeli/Aidat) Yerine Getirilmemesi</h4>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                            <div class="accordion-content px-5">
+                                <p class="text-sm text-slate-600">Bir takvim yılı içinde tahsis bedelinin ödenmesinde iki kez temerrüde düşülmesi veya aidat/ortak giderlerin iki kez vadesinde ödenmemesi ve ihtara rağmen ödenmemesi.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer">
+                            <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                                <h4 class="font-bold text-slate-700 text-sm">Tahsis Süresinin Dolması</h4>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </div>
+                            <div class="accordion-content px-5">
+                                <p class="text-sm text-slate-600">Konutun tesliminden itibaren 3 yıllık sürenin dolması halinde konut tahliye edilecek olup, ek tahsis süresi verilmeyecektir.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sss" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-circle-question text-primary-600"></i> 15 Soruda Kiralık Konut Projesi
+                </h2>
+                <p class="text-slate-600">Çevre, Şehircilik ve İklim Değişikliği Bakanı Murat Kurum’un paylaştığı bilgilere göre sıkça sorulan sorular ve cevapları.</p>
+            </div>
+
+            <!-- Intro Information Box -->
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-10 shadow-sm">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-primary-600 mt-1">
+                        <i class="fa-solid fa-map-location text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-lg mb-2">HANGİ İLÇEDE KAÇ KONUT KİRALANACAK?</h3>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Bakan Kurum’un paylaştığı bilgilere göre proje için ilçeler 4 grupta toplandı. Başakşehir, Gaziosmanpaşa, Beyoğlu ve Güngören ilçelerinde toplam <strong>360</strong>, Maltepe, Tuzla ve Kartal ilçelerinde toplam <strong>330</strong>, Ataşehir, Sancaktepe, Ümraniye ve Üsküdar ilçelerinde toplam <strong>291</strong>, Arnavutköy ilçesinde <strong>90</strong> olmak üzere toplam <strong>1071</strong> konut kiralanacak. İstanbul il sınırları içerisinde ikamet edenler istediği ilçe için başvuru yapabilecek. Yine 4 grupta vatandaşlara kontenjanlar tanındı. Genç Evli Ailelere, <strong>1+1 veya 2+1</strong> konut, İki veya Daha Fazla Çocuklu Ailelere <strong>2+1, 3+1 veya 4+1</strong> konut tahsis edilecek.
+                        </p>
+                    </div>
+                </div>
+                
+                <hr class="border-blue-200 mb-6">
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-primary-600 mt-1">
+                        <i class="fa-solid fa-money-check-dollar text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-lg mb-2">BAŞVURU ÜCRETİ ALINMAYACAK</h3>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Başvurular e-Devlet üzerinden, Toplu Konut İdaresi Başkanlığı hizmetleri arasında yer alan <strong>"Konut / İşyeri Başvuru"</strong> hizmeti menüsünden gerçekleştirilecek. Başvuru ücreti alınmayacak.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <div class="space-y-3" id="faq-accordion">
+                <!-- Soru 1 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">1- Kiralık konut projesinde kaç konut yapılacak?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Sosyal Konut Tahsisi Projesi kapsamında, Ekim 2026’da ilk etapta 1071 adet konutun teslimi yapılacak olup toplamda 15 bin konut kiralanacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 2 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">2- İlk etapta hangi ilçede kaç konut kiralanacak?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Konutlar 4 grupta tahsis edildi. Başakşehir, Gaziosmanpaşa, Beyoğlu ve Güngören ilçelerinde toplam 360, Maltepe, Tuzla ve Kartal ilçelerinde toplam 330, Ataşehir, Sancaktepe, Ümraniye ve Üsküdar ilçelerinde toplam 291 ve Arnavutköy ilçesinde 90 olmak üzere toplam 1071 konut kiralanacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 3 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">3- Hangi gruplara hangi büyüklükte evler tahsis edilecek?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Genç Evli Ailelere, 1+1 veya 2+1 konut, İki veya Daha Fazla Çocuklu Ailelere 2+1, 3+1 veya 4+1 konut tahsis edilecek.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 4 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">4- Proje başvuru şartları ve kategorileri nelerdir?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <ul class="text-sm text-slate-600 mt-4 list-disc pl-5 space-y-1">
+                            <strong>Kategori 1:</strong> Genç Evli Aileler: Başvuru sahibinin 18-30 yaş arasında bulunduğu aileler. (14/09/1996 tarihinden sonra doğan vatandaşlarımız başvurabilecektir.) <br>
+                            <strong>Kategori 2:</strong> İki veya Daha Fazla Çocuklu Aileler: Başvuru tarihi itibarıyla velayeti altında bulunan 18 yaşından küçük en az iki çocuğu bulunan aileler. (25/09/2008 tarihinden sonra doğan en az iki çocuğu bulunan aileler başvurabilecektir.) <br>
+                            <strong>Kategori 3:</strong> Diğer Aileler: Başvuru yapabilmek için evli olma şartı bulunmaktadır. (Ancak 65 yaş üzerindeki vatandaşlarımız için evli olma şartı aranmayacaktır.)<br>
+                            <h3 class="font-bold text-slate-800">Projeye başvuruda bulunacak vatandaşların aşağıdaki şartları sağlaması gerekmektedir.</h3>
+                            <li><strong>Vatandaşlık Şartı</strong>: Türkiye Cumhuriyeti vatandaşı olmak.</li>
+                            <li><strong>Yaş Şartı</strong>: Başvuru tarihi itibarıyla 18 yaşını tamamlamış olmak. (14/09/1996 tarihinden sonra doğmuş olmak)</li>
+                            <li><strong>Evlilik Şartı</strong>: Evli olmak. (Başvuru dönemi sonu itibariyle 65 yaşını doldurmuş kişiler için evlilik şartı aranmayacaktır.)</li>
+                            <li><strong>İkamet Şartı</strong>: İstanbul il sınırları içerisinde başvuru döneminin son günü itibarıyla en az bir yıldır Adres Kayıt Sisteminde kesintisiz ikamet ediyor ve Tarihçeli İkametgah Belgesi ile belgelendirebiliyor olmak,</li>
+                            <li><strong>Mülkiyet ve/veya Hak Sahipliği Bulunmaması Şartı</strong>: Başvuru sahibi veya eşinin;</li>
+                                <ul class="text-sm text-slate-600 mt-4 list-disc pl-5 space-y-1">
+                                    <li>Türkiye Cumhuriyeti sınırları içerisinde tapuda kayıtlı bağımsız bir konutunun bulunmaması,</li>
+                                    <li>Başvuru döneminin son gününden geriye doğru son beş yıl içerisinde bağımsız konut niteliğindeki bir taşınmazı edinmemiş, devretmemiş veya satmamış olması,</li>
+                                    <li> Başvuru döneminden önce Toplu Konut İdaresi Başkanlığı ile konut sözleşmesi imzalanmamış olması,</li>
+                                    <li> Başvuru döneminden önce Toplu Konut İdaresi tarafından yürütülen sosyal konut veya İlk Evim Arsa Projeleri kapsamında asil veya yedek aktif hak sahipliğinin bulunmaması şartları aranacaktır.</li>
+                                </ul>
+                            <li><strong>Gelir Şartı</strong>: Başvuru tarihi itibariyle son on iki aya ilişkin aylık ortalama hane halkı net gelirinin proje kapsamında belirlenen <strong>100.000₺</strong> üst sınırını aşmıyor olmak. </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Soru 5 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">5- İstanbul dışındaki illerden başvuru yapılabilecek mi?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Projeye sadece İstanbul ilinde ikamet eden vatandaşlarımız başvuru yapabilecek.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 6 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">6- İsteyen açıklanan ilçelerden herhangi birine başvuru yapabilecek mi? Bu ilçelerde ikamet ediyor olma koşulu var mı?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">İstanbul il sınırları içerisinde ikamet edenler istediği ilçe için başvuru yapabilecek.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 7 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">7- Üzerinde tapu olanlar başvuru yapabilecek mi?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Üzerinde konut tapusu olanlar başvuru yapamayacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 8 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">8- Daha önce ev alıp satanlar başvurabilecek mi?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Son 5 yıl içerisinde bağımsız konut niteliğindeki bir taşınmazı satın alan veya satanlar başvuru yapamayacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 9 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">9- Kiralık konut çıkan kişi ev alırsa evden çıkarılacak mı?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Evet, tahsis süresi içerisinde konut alınması durumunda konutun tahliye edilmesi gerekmektedir.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 10 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">10- Projede kaç tip ev yer alacak?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Proje kapsamında 1+1, 2+1, 3+1 ve 4+1 konut tipleri bulunmaktadır.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 11 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">11- Yıllık kira artışı olacak mı?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Konut teslimi için İdarece bildirilen tarihten itibaren 12 ay süreyle artırılmayacak. 12 aylık sürenin sona ermesini takip eden ilk ocak ayında, TÜFE oranında artış yapılacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 12 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">12- Kira ödemeleri ne zaman başlayacak?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Tahsis bedeli, konut teslimini takip eden ayın 20’sinde ödenmeye başlanacak.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 13 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">13- Sosyal konut veya İlk Evim Arsa projeleri kapsamında asil veya yedek aktif hak sahipliği bulunanlar başvurabilir mi?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Hayır, başvuru yapamazlar.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 14 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">14- Başvurular nasıl, ne zaman yapılacak, başvurunun kabul edilip edilmediği nasıl öğrenilecek?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Başvurular, e-Devlet üzerinden 14/09/2026 – 25/09/2026 tarihleri arasında alınacak. Yine vatandaşlarımız başvuru durumunu TOKİ hizmetleri arasında yer alan "Konut / İşyeri Başvuru" menüsünde görebilecektir.</p>
+                    </div>
+                </div>
+
+                <!-- Soru 15 -->
+                <div class="bg-white border border-slate-200 rounded-lg accordion-item cursor-pointer hover:border-primary-300 transition-colors">
+                    <div class="px-5 py-4 flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <h4 class="font-bold text-slate-700 text-sm pr-4">15- 3 yıl sonra süreyi uzatabiliyor muyuz?</h4>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform flex-shrink-0"></i>
+                    </div>
+                    <div class="accordion-content px-5 bg-slate-50 border-t border-slate-100">
+                        <p class="text-sm text-slate-600 mt-4">Hayır, tahsis süresi 3 yıl ile sınırlı olup uzatılmayacak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white border-t border-slate-200">
+    <div class="mb-22 rounded-2xl overflow-hidden shadow-lg border border-slate-200 group">
+        <img src="images/soru.jpg" alt="Soru Cevap Görseli" class="w-full h-[300px] md:h-[450px] object-cover">
+    </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-300 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="bg-slate-800 p-2 rounded-lg flex flex-col items-center justify-center w-12 h-12">
+                        <img src="images/logos/tc.png" alt="Logo" class="" style="width: 70px;">
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-white leading-tight">SOSYAL KONUT</h1>
+                        <p class="text-xs font-semibold text-slate-400 tracking-wider">TAHSİS PROJESİ</p>
+                    </div>
+                </div>
+                
+                <div class="text-sm text-center md:text-right">
+                    <p class="mb-1 text-slate-400">T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı</p>
+                    <p class="font-bold text-white">Toplu Konut İdaresi Başkanlığı</p>
+                </div>
+            </div>
+            
+            <hr class="border-slate-800 my-6">
+            
+            <div class="text-xs text-slate-500 bg-slate-800/50 p-4 rounded-lg flex gap-3 items-start">
+                <i class="fa-solid fa-circle-info mt-0.5"></i>
+                <p>
+                    <strong>Bilgilendirme Metni:</strong> <br>Bu web sayfası, Sosyal Konut Tahsis Projesi için bilgilendirme amaçlı hazırlanmıştır. Hukuki bağlayıcılığı bulunmamaktadır;<br> başvuru, kura ve tahsis işlemleri ilgili mevzuat, e-Devlet ve resmi TOKİ duyuruları çerçevesinde yürütülecektir.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data Extraction directly from PDF
+        const housingData = [
+            // 1. Grup
+            { grup: '1. Grup', ilce: 'Ataşehir', t1: 21, t2: 75, t3: 0, t3d: 0, t4: 0, total: 96 },
+            { grup: '1. Grup', ilce: 'Sancaktepe', t1: 0, t2: 58, t3: 27, t3d: 0, t4: 0, total: 85 },
+            { grup: '1. Grup', ilce: 'Ümraniye', t1: 15, t2: 21, t3: 18, t3d: 44, t4: 0, total: 98 },
+            { grup: '1. Grup', ilce: 'Üsküdar', t1: 0, t2: 12, t3: 0, t3d: 0, t4: 0, total: 12 },
+            // 2. Grup
+            { grup: '2. Grup', ilce: 'Maltepe', t1: 80, t2: 137, t3: 3, t3d: 0, t4: 15, total: 235 },
+            { grup: '2. Grup', ilce: 'Tuzla', t1: 0, t2: 49, t3: 27, t3d: 0, t4: 0, total: 76 },
+            { grup: '2. Grup', ilce: 'Kartal', t1: 0, t2: 18, t3: 1, t3d: 0, t4: 0, total: 19 },
+            // 3. Grup
+            { grup: '3. Grup', ilce: 'Başakşehir', t1: 0, t2: 40, t3: 8, t3d: 2, t4: 0, total: 50 },
+            { grup: '3. Grup', ilce: 'Gaziosmanpaşa', t1: 13, t2: 27, t3: 86, t3d: 0, t4: 0, total: 126 }, // 126 visible + 163 unknown = 289
+            { grup: '3. Grup', ilce: 'Beyoğlu', t1: 0, t2: 2, t3: 0, t3d: 0, t4: 0, total: 2 },
+            { grup: '3. Grup', ilce: 'Güngören', t1: 19, t2: 0, t3: 0, t3d: 0, t4: 0, total: 19 },
+            // 4. Grup
+            { grup: '4. Grup', ilce: 'Arnavutköy', t1: 0, t2: 76, t3: 14, t3d: 0, t4: 0, total: 90 }
+        ];
+
+        let currentFilter = 'all';
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+            initChart();
+            initMobileMenu();
+        });
+
+        // Mobile Menu Toggle
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Close menu on link click
+            const links = menu.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Accordion Logic
+        function toggleAccordion(element) {
+            const parent = element.parentElement;
+            
+            // Close others
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(item => {
+                if(item !== parent) {
+                    item.classList.remove('accordion-active');
+                }
+            });
+
+            // Toggle current
+            parent.classList.toggle('accordion-active');
+        }
+
+        // Filter Group Logic
+        function filterGroup(groupName) {
+            currentFilter = groupName;
+            
+            // Update buttons styling
+            document.querySelectorAll('.group-btn').forEach(btn => {
+                if(btn.innerText.includes(groupName) || (groupName === 'all' && btn.innerText === 'Tüm İstanbul')) {
+                    btn.classList.remove('bg-white', 'text-slate-600');
+                    btn.classList.add('bg-primary-600', 'text-white');
+                } else {
+                    btn.classList.remove('bg-primary-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-600');
+                }
+            });
+
+            document.getElementById('searchInput').value = '';
+            renderTable();
+        }
+
+        // Search Logic
+        function searchTable() {
+            renderTable(document.getElementById('searchInput').value.toLowerCase());
+        }
+
+        // Render Table Data
+        function renderTable(searchQuery = '') {
+            const tbody = document.getElementById('tableBody');
+            const tfoot = document.getElementById('tableFooter');
+            tbody.innerHTML = '';
+            tfoot.innerHTML = '';
+
+            let filteredData = housingData;
+
+            // Apply Group Filter
+            if (currentFilter !== 'all') {
+                filteredData = filteredData.filter(item => item.grup.startsWith(currentFilter.split(' ')[0]));
+            }
+
+            // Apply Search Filter
+            if (searchQuery) {
+                filteredData = filteredData.filter(item => item.ilce.toLowerCase().includes(searchQuery));
+            }
+
+            // Totals Variables
+            let sum1 = 0, sum2 = 0, sum3 = 0, sum3d = 0, sum4 = 0, sumTotal = 0;
+
+            filteredData.forEach(item => {
+                sum1 += item.t1;
+                sum2 += item.t2;
+                sum3 += item.t3;
+                sum3d += item.t3d;
+                sum4 += item.t4;
+                
+                // Add special note for Gaziosmanpaşa in calculation to reach 1071
+                let displayTotal = item.total;
+                let districtLabel = item.ilce;
+                
+                if (item.ilce === 'Gaziosmanpaşa') {
+                    displayTotal = 289; // Hardcoded from PDF (126 known + 163 unknown)
+                    districtLabel = 'Gaziosmanpaşa <span class="text-[10px] bg-amber-100 text-amber-700 px-1 py-0.5 rounded">* 163 adet dağılımı eklendi</span>';
+                    sumTotal += 289;
+                } else {
+                    sumTotal += item.total;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-xs font-semibold text-primary-600">${item.grup}</td>
+                    <td class="px-6 py-4 font-medium text-slate-800">${districtLabel}</td>
+                    <td class="px-6 py-4 text-center">${item.t1 > 0 ? item.t1 : '-'}</td>
+                    <td class="px-6 py-4 text-center">${item.t2 > 0 ? item.t2 : '-'}</td>
+                    <td class="px-6 py-4 text-center">${item.t3 > 0 ? item.t3 : '-'}</td>
+                    <td class="px-6 py-4 text-center">${item.t3d > 0 ? item.t3d : '-'}</td>
+                    <td class="px-6 py-4 text-center">${item.t4 > 0 ? item.t4 : '-'}</td>
+                    <td class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-50/50">${displayTotal}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Empty state
+            if(filteredData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="px-6 py-8 text-center text-slate-500">Kayıt bulunamadı.</td></tr>`;
+            } else {
+                // Add Footer row
+                tfoot.innerHTML = `
+                    <tr>
+                        <td colspan="2" class="px-6 py-4 text-right">TOPLAM</td>
+                        <td class="px-6 py-4 text-center">${sum1}</td>
+                        <td class="px-6 py-4 text-center">${sum2}</td>
+                        <td class="px-6 py-4 text-center">${sum3}</td>
+                        <td class="px-6 py-4 text-center">${sum3d}</td>
+                        <td class="px-6 py-4 text-center">${sum4}</td>
+                        <td class="px-6 py-4 text-center text-primary-700 text-lg">${sumTotal}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Initialize Chart.js
+        function initChart() {
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Genç Evli', 'İki+ Çocuklu', 'Diğer Evli', '6306 Kapsamı', 'Sosyal Hak Sahibi'],
+                    datasets: [{
+                        data: [25, 20, 25, 25, 5],
+                        backgroundColor: [
+                            '#0ea5e9', // bg-primary-500
+                            '#f59e0b', // amber
+                            '#8b5cf6', // violet
+                            '#10b981', // emerald
+                            '#f43f5e'  // rose
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                font: {
+                                    size: 11,
+                                    family: "'Inter', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': %' + context.parsed;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                },
+                plugins: [{
+                    id: 'textCenter',
+                    beforeDraw: function(chart) {
+                        var width = chart.width,
+                            height = chart.height,
+                            ctx = chart.ctx;
+
+                        ctx.restore();
+                        var fontSize = (height / 114).toFixed(2);
+                        ctx.font = "bold " + fontSize + "em Inter, sans-serif";
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = "#1e293b";
+
+                        var text = "5",
+                            textX = Math.round((width - ctx.measureText(text).width) / 2),
+                            textY = height / 2.3;
+
+                        ctx.fillText(text, textX, textY);
+                        
+                        ctx.font = "normal " + (fontSize*0.35).toFixed(2) + "em Inter, sans-serif";
+                        ctx.fillStyle = "#64748b";
+                        var subText = "Kategori",
+                            subTextX = Math.round((width - ctx.measureText(subText).width) / 2),
+                            subTextY = height / 2.3 + 20;
+                            
+                        ctx.fillText(subText, subTextX, subTextY);
+                        ctx.save();
+                    }
+                }]
+            });
+        }
+    </script>
+</body>
+</html>
